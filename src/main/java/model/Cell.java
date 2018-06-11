@@ -1,11 +1,9 @@
 package model;
 
 public class Cell {
-    private Position position;
     private CellStatus cellStatus;
 
-    public Cell(Position position, CellStatus cellStatus) {
-        this.position = position;
+    public Cell(CellStatus cellStatus) {
         this.cellStatus = cellStatus;
     }
 
@@ -20,6 +18,10 @@ public class Cell {
                 return CellStatus.ALIVE;
             }
         }
+        return cellStatus;
+    }
+
+    public CellStatus getCellStatus() {
         return cellStatus;
     }
 }

@@ -1,0 +1,24 @@
+# Auto-generated files
+build
+.idea
+
+# Project files
+*.iml
+*.ipr
+*.iws
+
+# Package Files #
+*.jar
+*.war
+*.nar
+*.ear
+*.zip
+*.tar.gz
+*.rar
+
+
+# IntelliJ
+out/
+
+# mpeltonen/sbt-idea plugin
+.idea_modules/

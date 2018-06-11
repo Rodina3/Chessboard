@@ -50,7 +50,19 @@ public class ChessboardTest {
     }
 
     @Test
-    public void shouldCllP22GetTwoAliveNeighbors() throws Exception {
+    public void shouldCellP22GetTwoAliveNeighbors() throws Exception {
         assertThat(chessboard.getAliveNeighborNumber(new Position(2, 2)), is(2));
+    }
+
+    @Test
+    public void shouldChessBoardGetNext() throws Exception {
+        Chessboard nextChessBoard = chessboard.getNextChessBoard();
+
+        Map<Position, Cell> cells = nextChessBoard.getCells();
+        assertThat(cells.get(new Position(1,1)).getCellStatus(),is(CellStatus.DEAD));
+        assertThat(cells.get(new Position(2,1)).getCellStatus(),is(CellStatus.ALIVE));
+        assertThat(cells.get(new Position(3,1)).getCellStatus(),is(CellStatus.ALIVE));
+        assertThat(cells.get(new Position(3,2)).getCellStatus(),is(CellStatus.ALIVE));
+        assertThat(cells.get(new Position(3,3)).getCellStatus(),is(CellStatus.DEAD));
     }
 }

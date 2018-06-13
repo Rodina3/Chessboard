@@ -23,43 +23,43 @@ public class Chessboard {
     public void initChessboard(Map<Position, Cell> aliveCells) {
         for (int i = 1; i <= length; i++) {
             for (int j = 1; j <= width; j++) {
-                initEachCell(aliveCells, i, j);
+                Position pos = new Position(i, j);
+                initEachCell(aliveCells, pos);
             }
         }
     }
 
-    private void initEachCell(Map<Position, Cell> aliveCells, int i, int j) {
-        Position pos = new Position(i, j);
-        if (aliveCells.containsKey(pos)) {
-            cells.put(pos, new Cell(CellStatus.ALIVE));
+    private void initEachCell(Map<Position, Cell> aliveCells, Position position) {
+        if (aliveCells.containsKey(position)) {
+            cells.put(position, new Cell(CellStatus.ALIVE));
         } else {
-            cells.put(pos, new Cell(CellStatus.DEAD));
+            cells.put(position, new Cell(CellStatus.DEAD));
         }
     }
 
-    public int getAliveNeighborNumber(Position position) {
+    public int countAliveNeighbors(Position position) {
         int leftBoundary = getLeftBoundary(position);
         int rightBoundary = getRightBoundary(position);
         int upperBoundary = getUpperBoundary(position);
         int bottomBoundary = getBottomBoundary(position);
 
-        int aliveNumbers = countAliveNumbers(leftBoundary, rightBoundary, upperBoundary, bottomBoundary);
+        int aliveNumbers = countAliveCellsWithinArea(leftBoundary, rightBoundary, upperBoundary, bottomBoundary);
         return minusCellItself(position, aliveNumbers);
     }
 
     public Chessboard getNextChessBoard() {
         for (int i = 1; i <= length; i++) {
             for (int j = 1; j <= width; j++) {
-                changeEachCell(i, j);
+                Position pos = new Position(i, j);
+                evolveEachCell(pos);
             }
         }
         return this;
     }
 
-    private void changeEachCell(int i, int j) {
-        Position position = new Position(i, j);
+    private void evolveEachCell(Position position) {
         Cell oldCell = getCell(position);
-        Cell newCell = new Cell(oldCell.getNextStatus(getAliveNeighborNumber(position)));
+        Cell newCell = oldCell.evolve(countAliveNeighbors(position));
         cells.put(position, newCell);
     }
 
@@ -87,7 +87,7 @@ public class Chessboard {
         return getCell(position).getCellStatus() == CellStatus.ALIVE ? aliveNumbers - 1 : aliveNumbers;
     }
 
-    private int countAliveNumbers(int leftBoundary, int rightBoundary, int upperBoundary, int bottomBoundary) {
+    private int countAliveCellsWithinArea(int leftBoundary, int rightBoundary, int upperBoundary, int bottomBoundary) {
         int aliveNumbers = 0;
         for (int i = leftBoundary; i <= rightBoundary; i++) {
             aliveNumbers = aliveNumbers + countEachRow(upperBoundary, bottomBoundary, i);

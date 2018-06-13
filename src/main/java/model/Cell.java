@@ -8,17 +8,22 @@ public class Cell {
     }
 
 
-    public CellStatus getNextStatus(int aliveNeighbors) {
-        if (cellStatus == CellStatus.ALIVE) {
-            if (aliveNeighbors > 3 || aliveNeighbors < 2) {
-                return CellStatus.DEAD;
-            }
-        } else {
-            if (aliveNeighbors == 3) {
-                return CellStatus.ALIVE;
-            }
+    public Cell evolve(int aliveNeighbors) {
+        return cellStatus == CellStatus.ALIVE ? aliveCellEvolve(aliveNeighbors) : deadCellEvolve(aliveNeighbors);
+    }
+
+    private Cell deadCellEvolve(int aliveNeighbors) {
+        if (aliveNeighbors == 3) {
+            this.cellStatus = CellStatus.ALIVE;
         }
-        return cellStatus;
+        return this;
+    }
+
+    private Cell aliveCellEvolve(int aliveNeighbors) {
+        if (aliveNeighbors > 3 || aliveNeighbors < 2) {
+            this.cellStatus = CellStatus.DEAD;
+        }
+        return this;
     }
 
     public CellStatus getCellStatus() {

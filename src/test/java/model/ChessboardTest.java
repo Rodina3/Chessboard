@@ -26,27 +26,27 @@ public class ChessboardTest {
 
     @Test
     public void shouldCellP11GetTwoAliveNeighbors() throws Exception {
-        assertThat(chessboard.getAliveNeighborNumber(new Position(1, 1)), is(2));
+        assertThat(chessboard.countAliveNeighbors(new Position(1, 1)), is(2));
     }
 
     @Test
     public void shouldCellP13GetOneAliveNeighbors() throws Exception {
-        assertThat(chessboard.getAliveNeighborNumber(new Position(1, 3)), is(1));
+        assertThat(chessboard.countAliveNeighbors(new Position(1, 3)), is(1));
     }
 
     @Test
     public void shouldCellP31GetThreeAliveNeighbors() throws Exception {
-        assertThat(chessboard.getAliveNeighborNumber(new Position(3, 1)), is(3));
+        assertThat(chessboard.countAliveNeighbors(new Position(3, 1)), is(3));
     }
 
     @Test
     public void shouldCellP33GetOneAliveNeighbors() throws Exception {
-        assertThat(chessboard.getAliveNeighborNumber(new Position(3, 3)), is(2));
+        assertThat(chessboard.countAliveNeighbors(new Position(3, 3)), is(2));
     }
 
     @Test
     public void shouldCellP22GetTwoAliveNeighbors() throws Exception {
-        assertThat(chessboard.getAliveNeighborNumber(new Position(2, 2)), is(2));
+        assertThat(chessboard.countAliveNeighbors(new Position(2, 2)), is(2));
     }
 
     @Test

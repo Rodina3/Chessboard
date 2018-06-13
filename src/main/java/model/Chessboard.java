@@ -15,6 +15,28 @@ public class Chessboard {
         this.cells = cells;
     }
 
+    public Chessboard(int length, int width) {
+        this.length = length;
+        this.width = width;
+    }
+
+    public void initChessboard(Map<Position, Cell> aliveCells) {
+        for (int i = 1; i <= length; i++) {
+            for (int j = 1; j <= width; j++) {
+                initEachCell(aliveCells, i, j);
+            }
+        }
+    }
+
+    private void initEachCell(Map<Position, Cell> aliveCells, int i, int j) {
+        Position pos = new Position(i, j);
+        if (aliveCells.containsKey(pos)) {
+            cells.put(pos, new Cell(CellStatus.ALIVE));
+        } else {
+            cells.put(pos, new Cell(CellStatus.DEAD));
+        }
+    }
+
     public int getAliveNeighborNumber(Position position) {
         int leftBoundary = getLeftBoundary(position);
         int rightBoundary = getRightBoundary(position);
@@ -28,16 +50,20 @@ public class Chessboard {
     public Chessboard getNextChessBoard() {
         for (int i = 1; i <= length; i++) {
             for (int j = 1; j <= width; j++) {
-                Position position = new Position(i, j);
-                Cell oldCell = getCell(position);
-                Cell newCell = new Cell(oldCell.getNextStatus(getAliveNeighborNumber(position)));
-                cells.put(position, newCell);
+                changeEachCell(i, j);
             }
         }
         return this;
     }
 
-    private Cell getCell(Position position) {
+    private void changeEachCell(int i, int j) {
+        Position position = new Position(i, j);
+        Cell oldCell = getCell(position);
+        Cell newCell = new Cell(oldCell.getNextStatus(getAliveNeighborNumber(position)));
+        cells.put(position, newCell);
+    }
+
+    public Cell getCell(Position position) {
         return this.cells.get(position);
     }
 
@@ -81,5 +107,13 @@ public class Chessboard {
 
     public Map<Position, Cell> getCells() {
         return cells;
+    }
+
+    public int getLength() {
+        return length;
+    }
+
+    public int getWidth() {
+        return width;
     }
 }

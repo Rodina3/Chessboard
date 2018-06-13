@@ -15,18 +15,13 @@ public class ChessboardTest {
 
     @Before
     public void setUp() throws Exception {
-        Map<Position, Cell> cells = new HashMap<>();
+        Map<Position, Cell> aliveCells = new HashMap<>();
 
-        cells.put(new Position(1, 1), new Cell(CellStatus.DEAD));
-        cells.put(new Position(1, 2), new Cell(CellStatus.DEAD));
-        cells.put(new Position(1, 3), new Cell(CellStatus.DEAD));
-        cells.put(new Position(2, 1), new Cell(CellStatus.ALIVE));
-        cells.put(new Position(2, 2), new Cell(CellStatus.ALIVE));
-        cells.put(new Position(2, 3), new Cell(CellStatus.DEAD));
-        cells.put(new Position(3, 1), new Cell(CellStatus.DEAD));
-        cells.put(new Position(3, 2), new Cell(CellStatus.ALIVE));
-        cells.put(new Position(3, 3), new Cell(CellStatus.DEAD));
-        chessboard = new Chessboard(3, 3, cells);
+        aliveCells.put(new Position(2, 1), new Cell(CellStatus.ALIVE));
+        aliveCells.put(new Position(2, 2), new Cell(CellStatus.ALIVE));
+        aliveCells.put(new Position(3, 2), new Cell(CellStatus.ALIVE));
+        chessboard = new Chessboard(3, 3);
+        chessboard.initChessboard(aliveCells);
     }
 
     @Test

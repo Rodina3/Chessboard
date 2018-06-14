@@ -21,7 +21,7 @@ public class ChessboardTest {
         aliveCells.put(new Position(2, 2), new Cell(CellStatus.ALIVE));
         aliveCells.put(new Position(3, 2), new Cell(CellStatus.ALIVE));
         chessboard = new Chessboard(3, 3);
-        chessboard.initChessboard(aliveCells);
+        chessboard.initChessboardWithAliveCells(aliveCells);
     }
 
     @Test

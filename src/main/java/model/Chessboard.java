@@ -44,9 +44,9 @@ public class Chessboard {
             for (int j = 1; j <= width; j++) {
                 Position pos = new Position(i, j);
                 Map<Position, Cell> oldChessboard = this.getCells();
-                Cell oldCell = oldChessboard.get(pos);
-                Cell newCell = oldCell.evolve(countAliveNeighbors(pos));
-                cells.put(pos, newCell);
+                Cell cell = oldChessboard.get(pos);
+                cell.evolve(countAliveNeighbors(pos));
+                cells.put(pos, cell);
             }
         }
         return this;
